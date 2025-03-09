@@ -1,0 +1,33 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "fangol"
+  devtools:
+    add-properties: false
+adapters:
+  postgres:
+    database: "fangol-db"
+    host: "localhost"
+    port: 5432
+    username: "postgres"
+    password: "postgres"
+    initialization-mode: always
+    schema: "public"
+    pool:
+      initial-size: 12
+      max-size: 15
+      max-idle-time: 10
+  profiles:
+    include: null
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+cors:
+  allowed-origins: "http://localhost:4200,http://localhost:8080,http://localhost:5032"
