@@ -12,7 +12,6 @@ adapters:
     port: 5432
     username: "postgres"
     password: "postgres"
-    initialization-mode: always
     schema: "public"
     pool:
       initial-size: 12

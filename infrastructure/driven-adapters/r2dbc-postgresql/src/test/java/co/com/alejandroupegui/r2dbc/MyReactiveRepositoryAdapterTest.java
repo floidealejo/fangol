@@ -1,5 +1,6 @@
 package co.com.alejandroupegui.r2dbc;
 
+import co.com.alejandroupegui.r2dbc.entities.Country;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Example;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
+
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -30,10 +33,10 @@ class MyReactiveRepositoryAdapterTest {
     @Test
     void mustFindValueById() {
 
-        when(repository.findById("1")).thenReturn(Mono.just(Country.builder().build()));
+        when(repository.findById(UUID.fromString("1"))).thenReturn(Mono.just(Country.builder().build()));
         when(mapper.map("test", Country.class)).thenReturn(Country.builder().build());
 
-        Mono<Object> result = repositoryAdapter.findById("1");
+        Mono<Object> result = repositoryAdapter.findById(UUID.fromString("1"));
 
         StepVerifier.create(result)
                 .expectNextMatches(value -> value.equals("test"))
